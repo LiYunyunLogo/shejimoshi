@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单例模式</title>
+    <style>
+        .modal{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            position: fixed;
+            left:50%;
+            margin-left: -100px;
+            top:50%;
+            margin-top: -100px;
+        }
+    </style>
+</head>
+<body>
+    <button id="modal-btn">弹窗</button>
+    <script>
+        // 单例模式 全局弹窗的使用，vuex、store
+        function createSingLayer(fn){
+            let instance
+            return function(){
+                if(!instance){
+                    instance = fn.apply(this,arguments)
+                }
+                return instance
+            }
+        }
+
+        function createModal(){
+            let div  =  document.createElement('div')
+            div.innerHTML = '我是弹窗'
+            div.className = 'modal'
+            div.style.display= "none"
+            document.body.appendChild(div)
+            return div
+        }
+        document.getElementById('modal-btn').addEventListener('click',()=>{
+            // 新建一个弹窗 动态创建弹窗,内部使用单例模式管理 一直希望只能有一个实例
+            let modalLayer = createSingLayer(createModal)()
+            modalLayer.style.display = modalLayer.style.display=="block" ? 'none': "block"
+        })
+
+    </script>
+</body>
+</html>
