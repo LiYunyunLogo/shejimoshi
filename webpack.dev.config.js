@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require("path")
 module.exports={
-    entry: "./src/index5.js",
+    entry: "./src/index7.js",
     output:{
         path:__dirname,
         filename:'./release/bundle.js'
